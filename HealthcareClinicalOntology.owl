@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/exam/ontologies/2026/healthcare"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/exam/ontologies/2026/healthcare">
+    <Prefix name="" IRI="http://www.semanticweb.org/exam/ontologies/2026/healthcare#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+
+    <!-- ==================== CLASS DECLARATIONS ==================== -->
+    <Declaration><Class IRI="#Person"/></Declaration>
+    <Declaration><Class IRI="#Patient"/></Declaration>
+    <Declaration><Class IRI="#HealthcareProvider"/></Declaration>
+    <Declaration><Class IRI="#Doctor"/></Declaration>
+    <Declaration><Class IRI="#GeneralPractitioner"/></Declaration>
+    <Declaration><Class IRI="#Specialist"/></Declaration>
+    <Declaration><Class IRI="#Nurse"/></Declaration>
+    <Declaration><Class IRI="#Disease"/></Declaration>
+    <Declaration><Class IRI="#ChronicDisease"/></Declaration>
+    <Declaration><Class IRI="#InfectiousDisease"/></Declaration>
+    <Declaration><Class IRI="#MedicalRecord"/></Declaration>
+    <Declaration><Class IRI="#Treatment"/></Declaration>
+    <Declaration><Class IRI="#MedicalPrescription"/></Declaration>
+    <Declaration><Class IRI="#Surgery"/></Declaration>
+    <Declaration><Class IRI="#Therapy"/></Declaration>
+    <Declaration><Class IRI="#Medication"/></Declaration>
+
+    <!-- ==================== OBJECT PROPERTY DECLARATIONS ==================== -->
+    <Declaration><ObjectProperty IRI="#hasDisease"/></Declaration>
+    <Declaration><ObjectProperty IRI="#treats"/></Declaration>
+    <Declaration><ObjectProperty IRI="#isTreatedBy"/></Declaration>
+    <Declaration><ObjectProperty IRI="#prescribesMedication"/></Declaration>
+    <Declaration><ObjectProperty IRI="#hasMedicalRecord"/></Declaration>
+    <Declaration><ObjectProperty IRI="#undergoesTreatment"/></Declaration>
+    <Declaration><ObjectProperty IRI="#recordsDisease"/></Declaration>
+    <Declaration><ObjectProperty IRI="#includesTreatment"/></Declaration>
+
+    <!-- ==================== DATA PROPERTY DECLARATIONS ==================== -->
+    <Declaration><DataProperty IRI="#patientID"/></Declaration>
+    <Declaration><DataProperty IRI="#dateOfBirth"/></Declaration>
+    <Declaration><DataProperty IRI="#diseaseName"/></Declaration>
+    <Declaration><DataProperty IRI="#licenseNumber"/></Declaration>
+    <Declaration><DataProperty IRI="#dosage"/></Declaration>
+    <Declaration><DataProperty IRI="#prescriptionDate"/></Declaration>
+
+    <!-- ==================== NAMED INDIVIDUAL DECLARATIONS ==================== -->
+    <Declaration><NamedIndividual IRI="#JohnDoe"/></Declaration>
+    <Declaration><NamedIndividual IRI="#MariaRossi"/></Declaration>
+    <Declaration><NamedIndividual IRI="#LucaBianchi"/></Declaration>
+    <Declaration><NamedIndividual IRI="#DrSmith"/></Declaration>
+    <Declaration><NamedIndividual IRI="#DrVerdi"/></Declaration>
+    <Declaration><NamedIndividual IRI="#Diabetes"/></Declaration>
+    <Declaration><NamedIndividual IRI="#Hypertension"/></Declaration>
+    <Declaration><NamedIndividual IRI="#Influenza"/></Declaration>
+    <Declaration><NamedIndividual IRI="#InsulinTherapyRx"/></Declaration>
+
+    <!-- ==================== CLASS HIERARCHY (SubClassOf) ==================== -->
+    <SubClassOf><Class IRI="#Patient"/><Class IRI="#Person"/></SubClassOf>
+    <SubClassOf><Class IRI="#HealthcareProvider"/><Class IRI="#Person"/></SubClassOf>
+    <SubClassOf><Class IRI="#Doctor"/><Class IRI="#HealthcareProvider"/></SubClassOf>
+    <SubClassOf><Class IRI="#Nurse"/><Class IRI="#HealthcareProvider"/></SubClassOf>
+    <SubClassOf><Class IRI="#GeneralPractitioner"/><Class IRI="#Doctor"/></SubClassOf>
+    <SubClassOf><Class IRI="#Specialist"/><Class IRI="#Doctor"/></SubClassOf>
+    <SubClassOf><Class IRI="#ChronicDisease"/><Class IRI="#Disease"/></SubClassOf>
+    <SubClassOf><Class IRI="#InfectiousDisease"/><Class IRI="#Disease"/></SubClassOf>
+    <SubClassOf><Class IRI="#MedicalPrescription"/><Class IRI="#Treatment"/></SubClassOf>
+    <SubClassOf><Class IRI="#Surgery"/><Class IRI="#Treatment"/></SubClassOf>
+    <SubClassOf><Class IRI="#Therapy"/><Class IRI="#Treatment"/></SubClassOf>
+
+    <!-- Patient and Doctor are disjoint (a person modeled as one is not simultaneously the other) -->
+    <DisjointClasses>
+        <Class IRI="#Patient"/>
+        <Class IRI="#HealthcareProvider"/>
+    </DisjointClasses>
+
+    <!-- ==================== OBJECT PROPERTY CHARACTERISTICS / DOMAIN / RANGE ==================== -->
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#treats"/>
+        <ObjectProperty IRI="#isTreatedBy"/>
+    </InverseObjectProperties>
+
+    <FunctionalObjectProperty><ObjectProperty IRI="#hasMedicalRecord"/></FunctionalObjectProperty>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasDisease"/>
+        <Class IRI="#Patient"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasDisease"/>
+        <Class IRI="#Disease"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#treats"/>
+        <Class IRI="#Doctor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#treats"/>
+        <Class IRI="#Patient"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#prescribesMedication"/>
+        <Class IRI="#Doctor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#prescribesMedication"/>
+        <Class IRI="#Medication"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMedicalRecord"/>
+        <Class IRI="#Patient"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMedicalRecord"/>
+        <Class IRI="#MedicalRecord"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#undergoesTreatment"/>
+        <Class IRI="#Patient"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#undergoesTreatment"/>
+        <Class IRI="#Treatment"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#recordsDisease"/>
+        <Class IRI="#MedicalRecord"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#recordsDisease"/>
+        <Class IRI="#Disease"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#includesTreatment"/>
+        <Class IRI="#MedicalRecord"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#includesTreatment"/>
+        <Class IRI="#Treatment"/>
+    </ObjectPropertyRange>
+
+    <!-- ==================== DATA PROPERTY DOMAIN / RANGE ==================== -->
+    <FunctionalDataProperty><DataProperty IRI="#patientID"/></FunctionalDataProperty>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#patientID"/>
+        <Class IRI="#Patient"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#patientID"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#dateOfBirth"/>
+        <Class IRI="#Person"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#dateOfBirth"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#date"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#diseaseName"/>
+        <Class IRI="#Disease"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#diseaseName"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#licenseNumber"/>
+        <Class IRI="#Doctor"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#licenseNumber"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#dosage"/>
+        <Class IRI="#Medication"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#dosage"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#prescriptionDate"/>
+        <Class IRI="#MedicalPrescription"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#prescriptionDate"/>
+        <Datatype IRI="http://www.w3.org/2001/XMLSchema#date"/>
+    </DataPropertyRange>
+
+    <!-- ==================== INDIVIDUALS: CLASS ASSERTIONS ==================== -->
+    <ClassAssertion><Class IRI="#Patient"/><NamedIndividual IRI="#JohnDoe"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#Patient"/><NamedIndividual IRI="#MariaRossi"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#Patient"/><NamedIndividual IRI="#LucaBianchi"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#Doctor"/><NamedIndividual IRI="#DrSmith"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#Doctor"/><NamedIndividual IRI="#DrVerdi"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#ChronicDisease"/><NamedIndividual IRI="#Diabetes"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#ChronicDisease"/><NamedIndividual IRI="#Hypertension"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#InfectiousDisease"/><NamedIndividual IRI="#Influenza"/></ClassAssertion>
+    <ClassAssertion><Class IRI="#MedicalPrescription"/><NamedIndividual IRI="#InsulinTherapyRx"/></ClassAssertion>
+
+    <!-- Patients are pairwise distinct (Open World Assumption safeguard) -->
+    <DifferentIndividuals>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <NamedIndividual IRI="#MariaRossi"/>
+        <NamedIndividual IRI="#LucaBianchi"/>
+    </DifferentIndividuals>
+    <DifferentIndividuals>
+        <NamedIndividual IRI="#DrSmith"/>
+        <NamedIndividual IRI="#DrVerdi"/>
+    </DifferentIndividuals>
+
+    <!-- ==================== INDIVIDUALS: OBJECT PROPERTY ASSERTIONS ==================== -->
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDisease"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <NamedIndividual IRI="#Diabetes"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDisease"/>
+        <NamedIndividual IRI="#MariaRossi"/>
+        <NamedIndividual IRI="#Hypertension"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDisease"/>
+        <NamedIndividual IRI="#LucaBianchi"/>
+        <NamedIndividual IRI="#Influenza"/>
+    </ObjectPropertyAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#treats"/>
+        <NamedIndividual IRI="#DrSmith"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#treats"/>
+        <NamedIndividual IRI="#DrSmith"/>
+        <NamedIndividual IRI="#MariaRossi"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#treats"/>
+        <NamedIndividual IRI="#DrVerdi"/>
+        <NamedIndividual IRI="#LucaBianchi"/>
+    </ObjectPropertyAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#undergoesTreatment"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <NamedIndividual IRI="#InsulinTherapyRx"/>
+    </ObjectPropertyAssertion>
+
+    <!-- ==================== INDIVIDUALS: DATA PROPERTY ASSERTIONS ==================== -->
+    <DataPropertyAssertion>
+        <DataProperty IRI="#patientID"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">PT-1001</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateOfBirth"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">1978-04-12</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#patientID"/>
+        <NamedIndividual IRI="#MariaRossi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">PT-1002</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateOfBirth"/>
+        <NamedIndividual IRI="#MariaRossi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">1985-09-23</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#patientID"/>
+        <NamedIndividual IRI="#LucaBianchi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">PT-1003</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateOfBirth"/>
+        <NamedIndividual IRI="#LucaBianchi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">1992-01-30</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#licenseNumber"/>
+        <NamedIndividual IRI="#DrSmith"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">MD-5521</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#licenseNumber"/>
+        <NamedIndividual IRI="#DrVerdi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">MD-7734</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#diseaseName"/>
+        <NamedIndividual IRI="#Diabetes"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Type 2 Diabetes Mellitus</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#prescriptionDate"/>
+        <NamedIndividual IRI="#InsulinTherapyRx"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-01-15</Literal>
+    </DataPropertyAssertion>
+
+</Ontology>

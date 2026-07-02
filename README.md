@@ -2,7 +2,7 @@
 
 An OWL 2.0 ontology modeling the core entities and relationships of a hospital clinical environment, developed with Protégé.
 
-**Author:** [Your Name]
+**Author:** RABBI HOSSEN
 **Course / Professor:** Matteo Cristani
 **Submission:** Exam Proposal — Healthcare Clinical Ontology
 
